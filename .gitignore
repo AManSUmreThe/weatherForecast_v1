@@ -1,0 +1,5 @@
+# node modules
+node_modules
+
+# hiding api keys
+getapikey.mjs
