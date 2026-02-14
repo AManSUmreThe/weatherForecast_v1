@@ -34,35 +34,26 @@ function formatDate(dateStr) {
 function renderforecast(data, section, grid) {
     if (!data || data.length === 0) return;
 
+    grid.innerHTML = "" 
+
     data.forEach(days => {
         const day = days.day || {};
         const cond = day.condition || {};
         //creating daily card
         const card = document.createElement("div")
         //adding tailwind classes to card
-        // card.className = "rounded-2xl bg-weather-surface border border-weather-border p-5 flex flex-col items-center text-center shadow-[0_4px_14px_-2px_rgba(13,148,136,0.08)] transition hover:bg-weather-surface-hover hover:border-weather-border-strong";
-        // //adding inner elements
-        // card.innerHTML = `
-        // <p class="font-semibold text-weather-text">${formatDate(days.date)}</p>
-        //     <img src="https:${cond.icon}" alt="${cond.text || ""}" class="w-14 h-14 my-3" />
-        //     <p class="text-sm text-weather-text-muted">${cond.text || ""}</p>
-        //     <p class="text-weather-text mt-2">
-        //         <span class="font-bold text-weather-primary">${day.maxtemp_c ?? ""}°</span> 
-        //         <span class="text-weather-text-soft">/</span> 
-        //         <span>${day.mintemp_c ?? ""}°</span>
-        // </p>
-        // `;
-        card.className = "group relative flex flex-col items-center text-center bg-weather-surface border border-weather-border rounded-3xl p-5 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-weather-primary/30 cursor-default";
+        // 1. CARD CONTAINER (Must have 'h-full')
+card.className = "h-full group relative flex flex-col items-center text-center bg-weather-surface border border-weather-border rounded-3xl p-4 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-weather-primary/30 cursor-default";
 
-        // Inner HTML
-        card.innerHTML = `
-    <h3 class="font-bold text-weather-text text-lg mb-1 tracking-tight">
-        ${formatDate(days.date)}
-    </h3>
+card.innerHTML = `
+    <div class="h-8 w-full flex items-center justify-center mb-1 shrink-0">
+        <h3 class="font-bold text-weather-text text-lg tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
+            ${formatDate(days.date)}
+        </h3>
+    </div>
 
-    <div class="relative w-20 h-20 my-2 flex items-center justify-center">
+    <div class="relative w-20 h-20 my-2 flex items-center justify-center shrink-0">
         <div class="absolute inset-0 bg-weather-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
         <img 
             src="https:${cond.icon}" 
             alt="${cond.text || ""}" 
@@ -70,11 +61,13 @@ function renderforecast(data, section, grid) {
         />
     </div>
 
-    <p class="text-sm font-medium text-weather-text-muted mb-4 line-clamp-1 min-h-5">
-        ${cond.text || ""}
-    </p>
+    <div class="h-10 w-full flex items-center justify-center mb-4 px-1 shrink-0">
+        <p class="text-sm font-medium text-weather-text-muted text-center leading-tight line-clamp-2">
+            ${cond.text || ""}
+        </p>
+    </div>
 
-    <div class="w-full bg-weather-bg-subtle/30 rounded-2xl p-3 flex items-center justify-between border border-weather-border/50">
+    <div class="w-full mt-auto bg-weather-bg-subtle/30 rounded-2xl p-3 flex items-center justify-between border border-weather-border/50 shrink-0">
         
         <div class="flex-1 flex flex-col border-r border-weather-border/50 pr-2">
             <span class="text-[10px] font-bold uppercase tracking-wider text-weather-text-soft mb-0.5">Max</span>

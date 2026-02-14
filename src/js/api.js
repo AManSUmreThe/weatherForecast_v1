@@ -1,4 +1,4 @@
-import API_KEY from "./getapikey.mjs";
+import API_KEY from "./getapikey.js";
 
 const BASE_URL = "https://api.weatherapi.com/v1/forecast.json";
 const FORECAST_DAYS = 7;
