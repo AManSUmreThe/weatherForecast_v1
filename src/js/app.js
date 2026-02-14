@@ -9,6 +9,12 @@ const searchBtn = document.getElementById("search-btn");
 //displaying error messages
 const errorMessage = document.getElementById("error-message");
 
+//
+countrySelect.addEventListener("change",onCountryChange);
+citySelect.addEventListener("change", onCityChange);
+searchBtn.addEventListener("click", runSearch);
+
+//intializing data variable
 let weatherData = [];
 let locData = [];
 
@@ -81,20 +87,9 @@ async function runSearch() {
         const data = await getWeatherData(selectedCity);
         renderdata(data);
     } catch (error) {
-        showError("Failed to fetch weather data. Please try again later.");
-        return;
+        showError(error.message || "Failed to fetch weather data. Please try again later.");
     }
 }
-// getWeatherData("Nagpur")
-//   .then((data) => {
-//     renderdata(data);
-//     })
-//   .catch((error) => {
-//     console.error("Error fetching weather data:", error);
-//   });
 
-countrySelect.addEventListener("change",onCountryChange);
-citySelect.addEventListener("change", onCityChange);
-searchBtn.addEventListener("click", runSearch);
-
+// main logic starts from here
 Main();
