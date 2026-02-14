@@ -36,11 +36,26 @@ function renderalerts(data,section) {
 }
 function rendercurrent(loc,data,section) {
     if(!data || !loc) return;
-
-    const loc = loc.location;
     const cond = data.condition || {}
 
-    
+    // adding basic info location, Time, temprature, condition
+    document.getElementById("current-location").textContent = `${loc.name}${loc.region ? ", " + loc.region : ""}, ${loc.country}`;
+    document.getElementById("current-datetime").textContent = loc.localtime || "";
+    document.getElementById("current-temp").textContent = `${data.temp_c} °C`;
+    document.getElementById("current-condition").textContent = cond.text || "";
+
+    // adding weather icon
+    const iconWrap = document.getElementById("current-icon-wrap");
+    iconWrap.innerHTML = "";
+
+    if(cond.icon){
+        const img = document.createElement("img");
+        img.src = "https:"+cond.icon
+        img.alt = cond.text || "Weather";
+        //adding tailwind Classes
+        img.className = "w-16 h-16";
+        iconWrap.append(img);
+    }
     section.classList.remove("hidden");
 }
 
