@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@theme {
+  /* Weather App - Clear Sky Theme */
+  
+  /* Backgrounds: Very light, airy blue gradient feel */
+  --color-weather-bg: #f0f9ff;         /* Sky-50 */
+  --color-weather-bg-subtle: #e0f2fe;  /* Sky-100 */
+  
+  /* Surfaces: Crisp white for cards/panels */
+  --color-weather-surface: #ffffff;
+  --color-weather-surface-hover: #f8fafc; /* Slate-50 */
+  
+  /* Primary Action: Vibrant Sky Blue */
+  --color-weather-primary: #0ea5e9;       /* Sky-500 */
+  --color-weather-primary-hover: #0284c7; /* Sky-600 */
+  --color-weather-primary-light: #bae6fd; /* Sky-200 (for light badges) */
+  
+  /* Typography: Deep Slate for high contrast */
+  --color-weather-text: #0f172a;       /* Slate-900 */
+  --color-weather-text-muted: #334155; /* Slate-700 */
+  --color-weather-text-soft: #64748b;  /* Slate-500 */
+  
+  /* Borders: Soft Blue for separation */
+  --color-weather-border: #e2e8f0;        /* Slate-200 */
+  --color-weather-border-strong: #7dd3fc; /* Sky-300 */
+  
+  /* Status Colors */
+  --color-weather-error-bg: #fef2f2;
+  --color-weather-error-border: #fecaca;
+  --color-weather-error-text: #dc2626;    /* Red-600 */
+  
+  --color-weather-warning-bg: #fffbeb;
+  --color-weather-warning-border: #fde68a;
+  --color-weather-warning-text: #b45309;  /* Amber-700 */
+  
+  /* Shadow tint */
+  --color-weather-shadow: #bae6fd; /* Sky-200 */
+}
