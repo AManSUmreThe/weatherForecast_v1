@@ -11,6 +11,7 @@ function renderdata(data) {
     
     renderalerts(alerts,alertsSection);
     rendercurrent(location,current,currentWeather);
+    // currentWeather.classList.remove('hidden')
     renderforecast(forecast,forecastSection);
 
     return;
@@ -27,11 +28,16 @@ function iconUrl(icon) {
 }
 
 function renderforecast(data,section) {
-    if(!data) return;
+    if(!data || data.length===0) return;
+
     section.classList.remove("hidden");
 }
 function renderalerts(data,section) {
-    if(!data) return;
+    if(!data || data.length===0) return;
+    console.log(data);
+    Section.innerHTML = "<strong class=\"text-weather-warning-text\">Alerts</strong><ul class=\"mt-2 space-y-1 list-disc list-inside text-weather-warning-text\">" +
+        alerts.map((a) => `<li>${a.headline || a.event || "Alert"}${a.severity ? " (" + a.severity + ")" : ""}</li>`).join("") +
+        "</ul>";
     section.classList.remove("hidden");
 }
 function rendercurrent(loc,data,section) {
