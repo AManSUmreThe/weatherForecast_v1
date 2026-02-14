@@ -18,14 +18,17 @@ function renderdata(data) {
 }
 
 function formatDate(dateStr) {
-    const d = new Date(dateStr + "T12:00:00");
-    return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+    try{
+        let d = new Date(dateStr)
+        return d.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" });
+    }catch(err)
+    {
+        // forecast returns date with invaild date format
+        const d = new Date(dateStr + "T12:00:00");
+        return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+    }
 }
 
-function iconUrl(icon) {
-    if (!icon) return "";
-    return icon.startsWith("//") ? "https:" + icon : icon;
-}
 
 function renderforecast(data,section) {
     if(!data || data.length===0) return;
@@ -45,8 +48,10 @@ function rendercurrent(loc,data,section) {
     const cond = data.condition || {}
 
     // adding basic info location, Time, temprature, condition
-    document.getElementById("current-location").textContent = `${loc.name}${loc.region ? ", " + loc.region : ""}, ${loc.country}`;
-    document.getElementById("current-datetime").textContent = loc.localtime || "";
+    // document.getElementById("current-location").textContent = `${loc.name}${loc.region ? ", " + loc.region : ""}, ${loc.country}`;
+    // location without region
+    document.getElementById("current-location").textContent = `${loc.name}, ${loc.country}`;
+    document.getElementById("current-datetime").textContent = formatDate(loc.localtime) || "";
     document.getElementById("current-temp").textContent = `${data.temp_c} °C`;
     document.getElementById("current-condition").textContent = cond.text || "";
 
