@@ -1,3 +1,4 @@
+// change to ./getapikey.js
 import API_KEY from "./getapikey.mjs";
 
 const BASE_URL = "https://api.weatherapi.com/v1/forecast.json";
