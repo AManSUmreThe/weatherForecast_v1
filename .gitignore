@@ -3,3 +3,5 @@ node_modules
 
 # hiding api keys
 getapikey.mjs
+
+README copy.md
