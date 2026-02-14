@@ -1,12 +1,26 @@
 import getWeatherData from "./api.js";
 import renderdata from "./render.js";
 
+//dropdown and searchbar
 const countrySelect = document.getElementById("country-select");
 const citySelect = document.getElementById("city-select");
 const searchBtn = document.getElementById("search-btn");
 
+//displaying error messages
+const errorMessage = document.getElementById("error-message");
+
 let weatherData = [];
 let locData = [];
+
+function showError(msg) {
+    errorMessage.innerHTML += "<br>" + msg;
+    errorMessage.classList.remove("hidden");
+}
+
+function clearError() {
+    errorMessage.classList.add("hidden");
+    errorMessage.innerHTML = "";
+}
 
 
 async function Main() {
@@ -19,6 +33,7 @@ async function Main() {
         
     } catch (error) {
         console.error("Error loading location data:", error);
+        showError("Error loading Locations data <br>" + error)
         return;
     }
     // populate country dropdown
@@ -57,6 +72,7 @@ function onCityChange() {
 
 async function runSearch() {
     const selectedCity = citySelect.value;
+    clearError();
     if (!selectedCity){
         alert("Please select a city before searching.");
         return;
@@ -65,7 +81,7 @@ async function runSearch() {
         const data = await getWeatherData(selectedCity);
         renderdata(data);
     } catch (error) {
-        alert("Failed to fetch weather data. Please try again later.");
+        showError("Failed to fetch weather data. Please try again later.");
         return;
     }
 }
